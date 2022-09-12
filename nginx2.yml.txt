@@ -1,7 +1,7 @@
 ---
 - hosts: host1
   tasks:
-    - name: install nginx and check the latest version
+    - name: install the latest version of nginx
       apt: name=nginx state=latest
       become: yes
     - name: start nginx
@@ -9,7 +9,7 @@
           name: nginx
           state: started
       become: yes
-    - name: copy the nginx config file and restart nginx
+    - name: copy the nginx config file to host1(vm2)
       copy:
         src: /etc/ansible/config.yml
         dest: /etc/nginx/sites-available/static_site.cfg
@@ -20,7 +20,7 @@
         dest: /etc/nginx/sites-enabled/default
         state: link
       become: yes
-    - name: copy the content of the web site
+    - name: copy the html file to host1(vm2)
       copy:
         src: /etc/ansible/web1/
         dest: /home/akhil/web
@@ -31,7 +31,7 @@
       become: yes
 - hosts: host2
   tasks:
-    - name: ensure nginx is at the latest version
+    - name: ensure nginx is the latest version
       apt: name=nginx state=latest
       become: yes
     - name: start nginx
@@ -39,7 +39,7 @@
           name: nginx
           state: started
       become: yes
-     - name: copy the nginx config file and restart nginx
+     - name: copy the nginx config file to host2(vm3)
       copy:
         src: /etc/ansible/config.yml
         dest: /etc/nginx/sites-available/static_site.cfg
@@ -50,7 +50,7 @@
         dest: /etc/nginx/sites-enabled/default
         state: link
       become: yes
-    - name: copy the content of the web site
+    - name: copy the html file to host2(vm3)
       copy:
         src: /etc/ansible/web2/
         dest: /home/akhil/web
