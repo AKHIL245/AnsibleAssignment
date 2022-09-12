@@ -1,0 +1,4 @@
+[host1]
+172.31.4.28 ansible_ssh_user=ubuntu
+[host2]
+172.31.8.64 ansible_ssh_user=ubuntu
